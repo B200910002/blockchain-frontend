@@ -16,9 +16,9 @@ import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/blockchain-frontend">
       <Routes>
-        <Route path="/blockchain-frontend" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<></>}></Route>
           <Route path="blockchain" element={<Blockchain />}>
             <Route index element={<><Blocks /><Transaction /></>}/>
