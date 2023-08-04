@@ -18,7 +18,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/blockchain-frontend" element={<Layout />}>
           <Route index element={<></>}></Route>
           <Route path="blockchain" element={<Blockchain />}>
             <Route index element={<><Blocks /><Transaction /></>}/>
