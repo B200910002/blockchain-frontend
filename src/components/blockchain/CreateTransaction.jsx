@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useContext, useState } from "react";
 import { Fonts } from "../../constants/styles";
 import {
   FormGroup,
@@ -8,73 +8,67 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { BlockchainContext } from "../../context/BlockchainContext";
+import { UserContext } from "../../context/UserContext";
 
-export default class CreateTransaction extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fromAddress:
-        "9d2ae321496d68f58ee47a046a4d17419cbe480f109cb7f6f9644412f4a5895c",
-      toAddress: "",
-      amount: 0,
-    };
-  }
-  static contextType = BlockchainContext;
-  render() {
-    const { createTransaction } = this.context;
-    return (
-      <div style={styles.container}>
-        <p style={Fonts.largeGray}>Create transaction</p>
-        <Form>
-          <FormGroup>
-            <FormLabel style={Fonts.smallGray}>From address</FormLabel>
-            <FormControl
-              type="text"
-              name="fromAddress"
-              disabled
-              placeholder="jak"
-              defaultValue={this.state.fromAddress}
-            />
-          </FormGroup>
+export default function CreateTransaction() {
+  const { cookie } = useContext(UserContext);
+  const { createTransaction } = useContext(BlockchainContext);
+  const [fromAddress] = useState(cookie.username);
+  const [toAddress, setToAddress] = useState("");
+  const [amount, setAmount] = useState(0);
 
-          <FormGroup>
-            <FormLabel style={Fonts.smallGray}>To address</FormLabel>
-            <FormControl
-              type="text"
-              name="toAddress"
-              placeholder="to address"
-              onChange={(event) => {
-                this.setState({ toAddress: event.target.value });
-              }}
-            />
-          </FormGroup>
+  return (
+    <div style={styles.container}>
+      <p style={Fonts.largeGray}>Create transaction</p>
+      <Form>
+        <FormGroup>
+          <FormLabel style={Fonts.smallGray}>From address</FormLabel>
+          <FormControl
+            type="text"
+            name="fromAddress"
+            disabled
+            placeholder="from address"
+            defaultValue={fromAddress}
+          />
+        </FormGroup>
 
-          <FormGroup>
-            <FormLabel style={Fonts.smallGray}>Amount</FormLabel>
-            <FormControl
-              type="number"
-              name="amount"
-              placeholder="amount"
-              onChange={(event) => {
-                this.setState({ amount: Number(event.target.value) });
-              }}
-            />
-          </FormGroup>
+        <FormGroup>
+          <FormLabel style={Fonts.smallGray}>To address</FormLabel>
+          <FormControl
+            type="text"
+            name="toAddress"
+            placeholder="to address"
+            onChange={(event) => {
+              setToAddress(event.target.value);
+            }}
+          />
+        </FormGroup>
 
-          <FormGroup style={styles.button}>
-            <Button
-              // type="submit"
-              onClick={() => {
-                createTransaction(this.state);
-              }}
-            >
-              Sign & create transaction
-            </Button>
-          </FormGroup>
-        </Form>
-      </div>
-    );
-  }
+        <FormGroup>
+          <FormLabel style={Fonts.smallGray}>Amount</FormLabel>
+          <FormControl
+            type="number"
+            name="amount"
+            placeholder="amount"
+            onChange={(event) => {
+              setAmount(Number(event.target.value));
+            }}
+          />
+        </FormGroup>
+
+        <FormGroup style={styles.button}>
+          <Button
+            // type="submit"
+            onClick={() => {
+              createTransaction({ fromAddress, toAddress, amount });
+            }}
+          >
+            Sign & create transaction
+          </Button>
+        </FormGroup>
+      </Form>
+    </div>
+  );
 }
 
 const styles = {

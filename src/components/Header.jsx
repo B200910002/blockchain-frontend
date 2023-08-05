@@ -1,41 +1,43 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
 import { Colors, Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
+import { UserContext } from "../context/UserContext";
 
-export default class Header extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-  render() {
-    return (
-      <>
-        <div style={styles.gridContainer}>
-          <div style={styles.gridItem}>
-            <Loader />
-          </div>
+export default function Header() {
+  const {cookie} = useContext(UserContext);
+  return (
+    <>
+      <div style={styles.gridContainer}>
+        <div style={styles.gridItem}>
+          <Loader />
         </div>
-        <ul style={styles.ul}>
-          <li style={styles.li}>
-            <Link style={styles.a} to="/blockchain">
-              <p style={Fonts.smallGray}>blockchain</p>
-            </Link>
-          </li>
-          <li style={styles.li}>
-            <Link style={styles.a} to="/blockchain/createTransaction">
-              <p style={Fonts.smallGray}>create Transaction</p>
-            </Link>
-          </li>{" "}
-          <li style={styles.li}>
-            <Link style={styles.a} to="/blockchain/pendingTransactions">
-              <p style={Fonts.smallGray}>pending Transactions</p>
-            </Link>
-          </li>
-        </ul>
-      </>
-    );
-  }
+      </div>
+      <ul style={styles.ul}>
+        <li style={styles.li}>
+          <Link style={styles.a} to="/blockchain">
+            <p style={Fonts.smallGray}>blockchain</p>
+          </Link>
+        </li>
+        <li style={styles.li}>
+          <Link style={styles.a} to="/blockchain/createTransaction">
+            <p style={Fonts.smallGray}>create Transaction</p>
+          </Link>
+        </li>{" "}
+        <li style={styles.li}>
+          <Link style={styles.a} to="/blockchain/pendingTransactions">
+            <p style={Fonts.smallGray}>pending Transactions</p>
+          </Link>
+        </li>
+        <li style={styles.li}>
+          <Link style={styles.a} to="#">
+            <p style={Fonts.smallGray}>{cookie?.username}</p>
+          </Link>
+        </li>
+      </ul>
+    </>
+  );
 }
 
 const styles = {

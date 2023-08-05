@@ -1,23 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import {} from "../constants/styles";
 
-export default class Loader extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-  // state = {};
-  render() {
-    return (
-      <div style={styles.container}>
-        <div className="loading">
-          <span className="shape shape-1"></span>
-          <span className="shape shape-2"></span>
-          <span className="shape shape-3"></span>
-          <span className="shape shape-4"></span>
-        </div>
+export default function Loader() {
+  return (
+    <div style={styles.container}>
+      <div className="loading">
+        <span className="shape shape-1"></span>
+        <span className="shape shape-2"></span>
+        <span className="shape shape-3"></span>
+        <span className="shape shape-4"></span>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 const styles = {

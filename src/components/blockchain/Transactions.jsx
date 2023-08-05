@@ -1,80 +1,80 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import { Colors, Fonts } from "../../constants/styles";
 import { BlockchainContext } from "../../context/BlockchainContext";
+import { UserContext } from "../../context/UserContext";
 
-export default class Transaction extends Component {
-  static contextType = BlockchainContext;
-  render() {
-    const { selectedBlock, getBalanceOfAddress } = this.context;
-    return (
-      <div style={styles.container}>
-        <p style={Fonts.largeGray}>
-          Transactions inside block {selectedBlock.index}
-        </p>
-        {selectedBlock.transactions.length !== 0 ? (
-          <div style={styles.table}>
-            <Table className="mt-4" bordered size="sm">
-              <thead style={Fonts.smallGray}>
-                <tr>
-                  <td>#</td>
-                  <td>From</td>
-                  <td>To</td>
-                  <td>Amount</td>
-                  <td>Timestamp</td>
-                  <td>Valid?</td>
-                </tr>
-              </thead>
-              <tbody style={Fonts.smallGray}>
-                {selectedBlock.transactions.map((transaction, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>
-                      {transaction.fromAddress ? (
-                        <Link
-                          to="wallet"
-                          onClick={() => {
-                            getBalanceOfAddress(transaction.fromAddress);
-                          }}
-                        >
-                          {transaction.fromAddress.slice(0, 40)}
-                        </Link>
-                      ) : (
-                        <p>System</p>
-                      )}
-                    </td>
-                    <td>
+export default function Transaction() {
+  const { cookie } = useContext(UserContext);
+  const { selectedBlock, getBalanceOfAddress } = useContext(BlockchainContext);
+
+  return (
+    <div style={styles.container}>
+      <p style={Fonts.largeGray}>
+        Transactions inside block {selectedBlock.index}
+      </p>
+      {selectedBlock?.transactions?.length !== 0 ? (
+        <div style={styles.table}>
+          <Table className="mt-4" bordered size="sm">
+            <thead style={Fonts.smallGray}>
+              <tr>
+                <td>#</td>
+                <td>From</td>
+                <td>To</td>
+                <td>Amount</td>
+                <td>Timestamp</td>
+                <td>Valid?</td>
+              </tr>
+            </thead>
+            <tbody style={Fonts.smallGray}>
+              {selectedBlock?.transactions?.map((transaction, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>
+                    {transaction.fromAddress ? (
                       <Link
                         to="wallet"
                         onClick={() => {
-                          getBalanceOfAddress(transaction.toAddress);
+                          getBalanceOfAddress(transaction?.fromAddress);
                         }}
                       >
-                        {transaction.toAddress.slice(0, 40)}
+                        {transaction?.fromAddress?.slice(0, 40)}
                       </Link>
-                    </td>
-                    <td>{transaction.amount}</td>
-                    <td>
-                      {transaction.timestamp}{" "}
-                      <p style={styles.timestamp}>
-                        {new Date(transaction.timestamp).toString()}
-                      </p>
-                    </td>
-                    <td>valid</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-        ) : (
-          <>
-            <p style={Fonts.smallGrayItalic}>This block has no transactions</p>
-          </>
-        )}
-      </div>
-    );
-  }
+                    ) : (
+                      <p>System</p>
+                    )}
+                  </td>
+                  <td>
+                    <Link
+                      to="wallet"
+                      onClick={() => {
+                        getBalanceOfAddress(transaction?.toAddress);
+                      }}
+                    >
+                      {transaction?.toAddress?.slice(0, 40)}
+                    </Link>
+                  </td>
+                  <td>{transaction?.amount}</td>
+                  <td>
+                    {transaction?.timestamp}{" "}
+                    <p style={styles.timestamp}>
+                      {new Date(transaction?.timestamp).toString()}
+                    </p>
+                  </td>
+                  <td>valid</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      ) : (
+        <>
+          <p style={Fonts.smallGrayItalic}>This block has no transactions</p>
+        </>
+      )}
+    </div>
+  );
 }
 
 const styles = {
