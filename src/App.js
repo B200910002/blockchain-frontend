@@ -1,6 +1,6 @@
 import React from "react";
 import Cookies from "js-cookie";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 import { Colors } from "./constants/styles";
 
@@ -16,21 +16,27 @@ import Blocks from "./components/blockchain/Blocks";
 import Transaction from "./components/blockchain/Transactions";
 import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
 
+import { UserProvider } from './context/UserContext';
+
 export default function App() {
   return (
-    <Routes>
-      <Route index element={<></>}></Route>
-      <Route path="/join" element={<Join />}></Route>
-      <Route path="/" element={<Layout />}>
-        <Route path="blockchain" element={<Blockchain />}>
-          <Route index element={<><Blocks /><Transaction /></>} />
-          <Route path="createTransaction" element={<CreateTransaction />} />
-          <Route path="pendingTransactions" element={<PendingTransactions />} />
-          <Route path="wallet" element={<BalanceOffAddress />} />
-        </Route>
-      </Route>
-      <Route path="*" element={<NoPage />} />
-    </Routes>
+    <UserProvider>
+      <BrowserRouter basename="/blockchain-frontend">
+        <Routes>
+          <Route index element={<></>}></Route>
+          <Route path="/join" element={<Join />}></Route>
+          <Route path="/" element={<Layout />}>
+            <Route path="blockchain" element={<Blockchain />}>
+              <Route index element={<><Blocks /><Transaction /></>} />
+              <Route path="createTransaction" element={<CreateTransaction />} />
+              <Route path="pendingTransactions" element={<PendingTransactions />} />
+              <Route path="wallet" element={<BalanceOffAddress />} />
+            </Route>
+          </Route>
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
