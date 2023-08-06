@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/blockchain-frontend/static/css/main.b43524c3.css",
-    "main.js": "/blockchain-frontend/static/js/main.2ee6fb1e.js",
+    "main.js": "/blockchain-frontend/static/js/main.f8c8ce8f.js",
     "static/js/787.f0668158.chunk.js": "/blockchain-frontend/static/js/787.f0668158.chunk.js",
     "static/media/backgroundImage.jpeg": "/blockchain-frontend/static/media/backgroundImage.8143061d6ace39232b65.jpeg",
     "static/media/chess.jpg": "/blockchain-frontend/static/media/chess.41795843e3633c822176.jpg",
@@ -9,11 +9,11 @@
     "static/media/dota2.jpg": "/blockchain-frontend/static/media/dota2.65f82f2120e0034b0020.jpg",
     "index.html": "/blockchain-frontend/index.html",
     "main.b43524c3.css.map": "/blockchain-frontend/static/css/main.b43524c3.css.map",
-    "main.2ee6fb1e.js.map": "/blockchain-frontend/static/js/main.2ee6fb1e.js.map",
+    "main.f8c8ce8f.js.map": "/blockchain-frontend/static/js/main.f8c8ce8f.js.map",
     "787.f0668158.chunk.js.map": "/blockchain-frontend/static/js/787.f0668158.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b43524c3.css",
-    "static/js/main.2ee6fb1e.js"
+    "static/js/main.f8c8ce8f.js"
   ]
 }
