@@ -8,17 +8,16 @@ export const UserContext = createContext({});
 export function UserProvider(props) {
     const [cookie, setCookie] = useState();
 
-    const refreshData = () => {
+    const refresh = () => {
         setCookie(Cookies.get("username"));
-        fetchGetCookies();
     };
 
     useEffect(() => {
-        refreshData();
+        refresh();
     }, []);
 
-    const fetchSetCookie = () => {
-        axios.post(SET_COOKIE, {username: "system"},{withCredentials: true}).then((response) => {
+    const fetchSetCookie = (username) => {
+        axios.post(SET_COOKIE, {username: username},{withCredentials: true}).then((response) => {
             alert(response.data);
         }).catch((error) => {
             alert(error.response.data);

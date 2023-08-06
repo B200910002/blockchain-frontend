@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
-import Loader from "./Loader";
+import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+
+import Loader from "./Loader";
 import { Colors, Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
+
 import { UserContext } from "../context/UserContext";
 
 export default function Header() {
-  const {cookie} = useContext(UserContext);
+  const {fetchClearCookie} = useContext(UserContext);
+
   return (
     <>
       <div style={styles.gridContainer}>
@@ -17,24 +21,29 @@ export default function Header() {
       <ul style={styles.ul}>
         <li style={styles.li}>
           <Link style={styles.a} to="/blockchain">
-            <p style={Fonts.smallGray}>blockchain</p>
+            <p style={Fonts.smallGray}>Blockchain</p>
           </Link>
         </li>
         <li style={styles.li}>
           <Link style={styles.a} to="/blockchain/createTransaction">
-            <p style={Fonts.smallGray}>create Transaction</p>
+            <p style={Fonts.smallGray}>Create Transaction</p>
           </Link>
         </li>{" "}
         <li style={styles.li}>
           <Link style={styles.a} to="/blockchain/pendingTransactions">
-            <p style={Fonts.smallGray}>pending Transactions</p>
+            <p style={Fonts.smallGray}>Pending Transactions</p>
           </Link>
         </li>
-        <li style={styles.li}>
-          <Link style={styles.a} to="#">
-            <p style={Fonts.smallGray}>{cookie?.username}</p>
+        {Cookies.get("username") ? (<li style={styles.li}>
+          <Link style={styles.a} to="/blockchain/wallet">
+            <p style={Fonts.smallGray}>My Wallet</p>
           </Link>
-        </li>
+        </li>) : <></>}
+        {Cookies.get("username") ? (<li style={styles.li}>
+          <Link style={styles.a} to="/join" onClick={() => fetchClearCookie()}>
+            <p style={Fonts.smallGray}>Log Out</p>
+          </Link>
+        </li>) : <></>}
       </ul>
     </>
   );
