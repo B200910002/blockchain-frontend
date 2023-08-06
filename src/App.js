@@ -23,7 +23,7 @@ export default function App() {
     <UserProvider>
       <BrowserRouter basename="/blockchain-frontend">
         <Routes>
-          <Route path="/join" element={<Join />}></Route>
+          <Route index element={<Join />}></Route>
           <Route path="/" element={<Layout />}>
             <Route path="blockchain" element={<Blockchain />}>
               <Route index element={<><Blocks /><Transaction /></>} />
