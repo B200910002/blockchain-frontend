@@ -9,7 +9,8 @@ export default function Join() {
     const { fetchSetCookie } = useContext(UserContext);
     const [username, setUsername] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         fetchSetCookie(username);
     }
 
@@ -28,7 +29,7 @@ export default function Join() {
                     </div>
                     <p style={Fonts.smallGray}>enter a username to join</p>
                     <div className="d-flex justify-content-center">
-                        <Link className="a" onClick={() => handleSubmit()}>
+                        <Link className="a" onClick={(event) => handleSubmit(event)}>
                             <span></span>
                             <span></span>
                             <span></span>
