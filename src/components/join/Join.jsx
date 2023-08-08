@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 
 import { Fonts } from "../../constants/styles";
 import { UserContext } from "../../context/UserContext";
+import Cookies from "js-cookie";
 
 export default function Join() {
     const { fetchSetCookie } = useContext(UserContext);
@@ -38,7 +38,7 @@ export default function Join() {
                         </Link>
                     </div>
                 </form>
-            </div>) : <>{window.location.href = "/blockchain-frontend"}</>}
+            </div>) : <>{window.location.href = "/blockchain-frontend/blockchain"}</>}
         </>
     );
 }

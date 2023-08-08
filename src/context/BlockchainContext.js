@@ -30,7 +30,6 @@ export function BlockchainProvider(props) {
 
   useEffect(() => {
     refreshData();
-    console.log(selectedBlock);
   }, [selectedBlock]);
 
   const getBalanceOfAddress = (address) => {

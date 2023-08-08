@@ -40,6 +40,7 @@ export default function App() {
 }
 
 const Layout = () => {
+  console.log(Cookies.get("username"))
   return (
     <>
       {Cookies.get("username") ?
@@ -50,7 +51,9 @@ const Layout = () => {
           </div>
           <Footer />
         </>) 
-        : <>{window.location.href = "/blockchain-frontend/join"}</>
+        : <>
+        {window.location.href = "/blockchain-frontend/"}
+        </>
       }
     </>
   );

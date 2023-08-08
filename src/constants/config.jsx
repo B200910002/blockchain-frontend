@@ -1,7 +1,7 @@
 // production
-export const BASE_URL = `https://blockchain-service.onrender.com`;
+// export const BASE_URL = `https://blockchain-service.onrender.com`;
 // development
-// export const BASE_URL = `http://localhost:9000`;
+export const BASE_URL = `http://localhost:9000`;
 
 export const SET_COOKIE = `${BASE_URL}/user/setcookie`;
 export const GET_COOKIES = `${BASE_URL}/user/getcookies`;

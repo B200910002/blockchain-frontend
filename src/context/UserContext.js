@@ -19,6 +19,11 @@ export function UserProvider(props) {
     const fetchSetCookie = (username) => {
         axios.post(SET_COOKIE, {username: username},{withCredentials: true}).then((response) => {
             alert(response.data);
+            axios.get(GET_COOKIES, {withCredentials: true}).then((r) => {
+                console.log(r.data.username)
+                Cookies.set("username", r.data.username);
+                window.location.href = "/blockchain-frontend/blockchain"
+            })
         }).catch((error) => {
             alert(error.response.data);
         });
@@ -26,15 +31,17 @@ export function UserProvider(props) {
 
     const fetchGetCookies = () => {
         axios.get(GET_COOKIES, {withCredentials: true}).then((response) => {
-            setCookie(response.data)
+            alert(response.data)
         }).catch((error) => {
             alert(error.response.data);
         });
     }
 
     const fetchClearCookie = () => {
+        console.log("print")
         axios.delete(CLEAR_COOKIE,{withCredentials: true}).then((response) => {
-            alert(response.data)
+            Cookies.remove("username");
+            window.location.href = "/blockchain-frontend"
         }).catch((error) => {
             alert(error.response.data);
         });

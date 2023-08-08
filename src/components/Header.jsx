@@ -40,7 +40,7 @@ export default function Header() {
           </Link>
         </li>) : <></>}
         {Cookies.get("username") ? (<li style={styles.li}>
-          <Link style={styles.a} to="/join" onClick={() => fetchClearCookie()}>
+          <Link style={styles.a} onClick={() => fetchClearCookie()}>
             <p style={Fonts.smallGray}>Log Out</p>
           </Link>
         </li>) : <></>}
